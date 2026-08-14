@@ -1,0 +1,204 @@
+:root {
+    -fx-primary: #1d2433;
+    -fx-primary-2: #2a3347;
+    -fx-accent: #63d1ff;
+    -fx-accent-2: #9be7ff;
+    -fx-surface: #f4f7fb;
+    -fx-text: #f7fbff;
+    -fx-text-dark: #18212f;
+    -fx-muted: #9fb6c7;
+    -fx-border: rgba(255,255,255,0.12);
+    -fx-shadow: rgba(0,0,0,0.2);
+}
+
+.root {
+    -fx-background-color: linear-gradient(to bottom, #101722 0%, #171f2d 100%);
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.main-shell {
+    -fx-padding: 24px;
+    -fx-background-color: transparent;
+}
+
+.title-bar {
+    -fx-padding: 0 0 18px 0;
+}
+
+.page-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -fx-text;
+}
+
+.section-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -fx-muted;
+    -fx-padding: 0 0 10px 0;
+}
+
+.course-grid {
+    -fx-padding: 12px 0 0 0;
+    -fx-hgap: 18px;
+    -fx-vgap: 18px;
+}
+
+.course-card {
+    -fx-background-radius: 18px;
+    -fx-border-radius: 18px;
+    -fx-background-color: linear-gradient(to bottom, rgba(42, 51, 71, 0.95), rgba(28, 35, 48, 0.96));
+    -fx-border-color: -fx-border;
+    -fx-border-width: 1px;
+    -fx-padding: 18px 16px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 12, 0.2, 0, 4);
+}
+
+.course-card:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(58, 72, 98, 1), rgba(35, 42, 58, 1));
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+}
+
+.course-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -fx-text;
+}
+
+.course-abbr {
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -fx-accent-2;
+    -fx-padding: 8px 0 0 0;
+}
+
+.course-pb-count {
+    -fx-font-size: 13px;
+    -fx-text-fill: -fx-muted;
+    -fx-padding: 12px 0 0 0;
+}
+
+.detail-shell {
+    -fx-padding: 20px;
+    -fx-background-color: transparent;
+}
+
+.detail-header {
+    -fx-padding: 0 0 18px 0;
+}
+
+.course-heading {
+    -fx-font-size: 30px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -fx-text;
+}
+
+.star-list {
+    -fx-padding: 12px 0 0 0;
+}
+
+.star-row {
+    -fx-background-color: rgba(255,255,255,0.02);
+    -fx-background-radius: 12px;
+    -fx-padding: 10px 12px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+}
+
+.star-row:hover {
+    -fx-background-color: rgba(99, 209, 255, 0.08);
+    -fx-border-color: rgba(99, 209, 255, 0.35);
+}
+
+.star-name {
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-text;
+}
+
+.star-pb {
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -fx-accent-2;
+}
+
+.star-pb-empty {
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-muted;
+}
+
+.subtle-button {
+    -fx-background-color: #2c3b52;
+    -fx-text-fill: -fx-text;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 15px;
+    -fx-cursor: hand;
+}
+
+.subtle-button:hover {
+    -fx-background-color: #36557a;
+}
+
+.card-panel {
+    -fx-background-color: rgba(27, 36, 49, 0.9);
+    -fx-background-radius: 18px;
+    -fx-padding: 18px;
+    -fx-border-color: -fx-border;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 10, 0.2, 0, 3);
+}
+
+.field-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -fx-muted;
+}
+
+.input-field {
+    -fx-background-color: #1a2332;
+    -fx-text-fill: -fx-text;
+    -fx-border-color: rgba(255,255,255,0.1);
+    -fx-border-radius: 8px;
+    -fx-padding: 8px 10px;
+}
+
+.summary-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-muted;
+}
+
+.summary-value {
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -fx-text;
+}
+
+.history-list {
+    -fx-padding: 8px 0 0 0;
+}
+
+.history-row {
+    -fx-padding: 8px 0;
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-width: 0 0 1px 0;
+}
+
+.history-time {
+    -fx-font-weight: 700;
+    -fx-text-fill: -fx-accent-2;
+}
+
+.history-date {
+    -fx-text-fill: -fx-muted;
+}
+
+.alert-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #89f7b1;
+}
+
+.alert-error {
+    -fx-text-fill: #ff9aa7;
+}
