@@ -17,8 +17,14 @@
                 <Label text="Course Select" styleClass="page-title"/>
             </VBox>
 
-            <Label text="Courses" styleClass="section-label"/>
-            <FlowPane fx:id="courseGrid" prefWrapLength="1100" styleClass="course-grid" hgap="18" vgap="18"/>
+            <Label text="Main Courses" styleClass="section-label"/>
+            <FlowPane fx:id="mainCourseGrid" prefWrapLength="1100" styleClass="course-grid" hgap="18" vgap="18"/>
+
+            <Label text="Bowser Stages" styleClass="section-label"/>
+            <FlowPane fx:id="bowserCourseGrid" prefWrapLength="1100" styleClass="course-grid" hgap="18" vgap="18"/>
+
+            <Label text="Secret Stages" styleClass="section-label"/>
+            <FlowPane fx:id="secretCourseGrid" prefWrapLength="1100" styleClass="course-grid" hgap="18" vgap="18"/>
         </VBox>
     </content>
 </ScrollPane>

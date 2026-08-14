@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 
 public class StarDetailController {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     @FXML
     private Label starNameLabel;
@@ -146,7 +147,10 @@ public class StarDetailController {
             Label date = new Label(pb.getAchievedAt().format(DATE_FORMATTER));
             date.getStyleClass().add("history-date");
 
-            row.getChildren().addAll(time, date);
+            Label clockTime = new Label(pb.getAchievedAt().format(TIME_FORMATTER));
+            clockTime.getStyleClass().add("history-date");
+
+            row.getChildren().addAll(time, date, clockTime);
             historyContainer.getChildren().add(row);
         }
     }

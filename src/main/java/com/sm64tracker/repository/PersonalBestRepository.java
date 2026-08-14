@@ -5,8 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,7 @@ public class PersonalBestRepository {
 
             statement.setLong(1, starId);
             statement.setLong(2, timeInMs);
-            statement.setTimestamp(3, Timestamp.valueOf(achievedAt));
+            statement.setLong(3, achievedAt.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
             statement.executeUpdate();
         } catch (SQLException exception) {
             throw new IllegalStateException("Unable to insert new PB.", exception);
@@ -71,11 +72,13 @@ public class PersonalBestRepository {
     }
 
     private PersonalBest mapPersonalBest(ResultSet resultSet) throws SQLException {
+        long epochMs = resultSet.getLong("achieved_at");
+        LocalDateTime achievedAt = Instant.ofEpochMilli(epochMs).atZone(ZoneId.systemDefault()).toLocalDateTime();
         return new PersonalBest(
                 resultSet.getLong("id"),
                 resultSet.getLong("star_id"),
                 resultSet.getLong("time_in_ms"),
-                resultSet.getTimestamp("achieved_at").toLocalDateTime()
+                achievedAt
         );
     }
 }

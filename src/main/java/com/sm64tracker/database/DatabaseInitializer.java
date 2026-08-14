@@ -20,9 +20,16 @@ public final class DatabaseInitializer {
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT NOT NULL UNIQUE,
                     abbreviation TEXT NOT NULL UNIQUE,
-                    course_number INTEGER NOT NULL
+                    course_number INTEGER NOT NULL,
+                    course_type TEXT NOT NULL DEFAULT 'MAIN'
                 )
                 """);
+
+            // Migrate existing databases that predate the course_type column
+            try {
+                statement.executeUpdate("ALTER TABLE courses ADD COLUMN course_type TEXT NOT NULL DEFAULT 'MAIN'");
+            } catch (SQLException ignored) {
+            }
 
             statement.executeUpdate("""
                 CREATE TABLE IF NOT EXISTS stars (

@@ -1,4 +1,4 @@
-:root {
+.root {
     -fx-primary: #1d2433;
     -fx-primary-2: #2a3347;
     -fx-accent: #63d1ff;
@@ -9,9 +9,6 @@
     -fx-muted: #9fb6c7;
     -fx-border: rgba(255,255,255,0.12);
     -fx-shadow: rgba(0,0,0,0.2);
-}
-
-.root {
     -fx-background-color: linear-gradient(to bottom, #101722 0%, #171f2d 100%);
     -fx-font-family: "Segoe UI", sans-serif;
 }

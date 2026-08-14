@@ -15,7 +15,7 @@ import com.sm64tracker.model.Course;
 public class CourseRepository {
 
     public List<Course> findAll() {
-        String sql = "SELECT id, name, abbreviation, course_number FROM courses ORDER BY course_number ASC, name ASC";
+        String sql = "SELECT id, name, abbreviation, course_number, course_type FROM courses ORDER BY course_number ASC, name ASC";
         List<Course> courses = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(DatabaseConfig.getDatabaseUrl());
@@ -33,7 +33,7 @@ public class CourseRepository {
     }
 
     public Optional<Course> findById(long courseId) {
-        String sql = "SELECT id, name, abbreviation, course_number FROM courses WHERE id = ?";
+        String sql = "SELECT id, name, abbreviation, course_number, course_type FROM courses WHERE id = ?";
 
         try (Connection connection = DriverManager.getConnection(DatabaseConfig.getDatabaseUrl());
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -51,7 +51,27 @@ public class CourseRepository {
         return Optional.empty();
     }
 
-    public long insertIfNotExists(String name, String abbreviation, int courseNumber) {
+    public List<Course> findAllByType(String courseType) {
+        String sql = "SELECT id, name, abbreviation, course_number, course_type FROM courses WHERE course_type = ? ORDER BY course_number ASC";
+        List<Course> courses = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DatabaseConfig.getDatabaseUrl());
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, courseType);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    courses.add(mapCourse(resultSet));
+                }
+            }
+        } catch (SQLException exception) {
+            throw new IllegalStateException("Unable to load courses by type.", exception);
+        }
+
+        return courses;
+    }
+
+    public long insertIfNotExists(String name, String abbreviation, int courseNumber, String courseType) {
         String selectSql = "SELECT id FROM courses WHERE name = ? OR abbreviation = ?";
 
         try (Connection connection = DriverManager.getConnection(DatabaseConfig.getDatabaseUrl());
@@ -66,11 +86,12 @@ public class CourseRepository {
                 }
             }
 
-            String insertSql = "INSERT INTO courses (name, abbreviation, course_number) VALUES (?, ?, ?)";
+            String insertSql = "INSERT INTO courses (name, abbreviation, course_number, course_type) VALUES (?, ?, ?, ?)";
             try (PreparedStatement insertStatement = connection.prepareStatement(insertSql)) {
                 insertStatement.setString(1, name);
                 insertStatement.setString(2, abbreviation);
                 insertStatement.setInt(3, courseNumber);
+                insertStatement.setString(4, courseType);
                 insertStatement.executeUpdate();
             }
 
@@ -116,12 +137,12 @@ public class CourseRepository {
 
     public List<Course> findWithPbCount() {
         String sql = """
-            SELECT c.id, c.name, c.abbreviation, c.course_number,
+            SELECT c.id, c.name, c.abbreviation, c.course_number, c.course_type,
                    COUNT(DISTINCT pb.star_id) AS pb_count
             FROM courses c
             LEFT JOIN stars s ON s.course_id = c.id
             LEFT JOIN personal_bests pb ON pb.star_id = s.id
-            GROUP BY c.id, c.name, c.abbreviation, c.course_number
+            GROUP BY c.id, c.name, c.abbreviation, c.course_number, c.course_type
             ORDER BY c.course_number ASC, c.name ASC
             """;
 
@@ -145,7 +166,8 @@ public class CourseRepository {
                 resultSet.getLong("id"),
                 resultSet.getString("name"),
                 resultSet.getString("abbreviation"),
-                resultSet.getInt("course_number")
+                resultSet.getInt("course_number"),
+                resultSet.getString("course_type")
         );
     }
 }
